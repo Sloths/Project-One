@@ -1,4 +1,5 @@
 from Tkinter import *
+import ttk
 #Creating window and canvas
 window = Tk()
 canvas = Canvas(window, width=854, height=480, bg='white')
