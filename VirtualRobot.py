@@ -8,6 +8,12 @@ window.title('Sloths Virtual Robot')
 window.geometry('{}x{}'. format(874,568))
 window.resizable(width=FALSE, height=FALSE)
 
+#Start Function
+def Start():
+  
+#Stop Function
+def Stop():
+
 #Reset Function
 def Reset():
   canvas.delete("all")
@@ -16,8 +22,8 @@ def Reset():
   #Add Remove robot code
 
 #Creating buttons
-btnStart=Button(window, text='Start', height=1, width=20) #Add command once coded
-btnStop=Button(window, text='Stop', height=1, width=20) #Add command once coded
+btnStart=Button(window, text='Start', height=1, width=20, command=Start)
+btnStop=Button(window, text='Stop', height=1, width=20, command=Stop)
 btnReset=Button(window, text='Reset', height=1, width=20, command=Reset)
 
 #Places buttons in correct positions
