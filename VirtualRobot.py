@@ -11,6 +11,11 @@ window.title('Sloths Virtual Robot')
 window.geometry('{}x{}'. format(874,568))
 window.resizable(width=FALSE, height=FALSE)
 
+#Stop Function defined as Global 
+def Stop():
+    global programRunning
+    programRunning = False
+    
 #Start Function
 def Start():
     
@@ -24,11 +29,9 @@ def Start():
     vx = 10.0 # x velocity
     vy = 5.0 # y velocity
 
+
     # create robot
-    # respawn
-    rbx = random.randrange(0, 854, 1)
-    rby = random.randrange(0,480, 1)
-    rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "red")
+    rb1 = canvas.create_rectangle(40, 80, 50, 90, fill = "red")
     
     # create test obstacle
     #ob_x1 = random.randint(0, 854 - 50) # generate random x1 value
@@ -41,9 +44,11 @@ def Start():
     ob4=canvas.create_rectangle(100, 380, 200, 310,fill='white', width=3)
     ob5=canvas.create_rectangle(754, 380, 654, 310,fill='white', width=3)
 
+#Define as a global variable once to keep using
+    global programRunning
     programRunning = True
 
-    while programRunning:  
+    while programRunning == True:  
 
         # create shape coordinates
         rx1, ry1, rx2, ry2 = canvas.coords(rb1) # robot
@@ -93,7 +98,7 @@ def Start():
 
         # Sleep for 0.1 seconds, then delete the image.
         time.sleep(0.1)  
-
+    
 
 #Reset Function
 def Reset():
@@ -113,7 +118,7 @@ def Map1():
 
 #Creating buttons
 btnStart=Button(window, text='Start', height=1, width=20, command=Start)
-btnStop=Button(window, text='Stop', height=1, width=20)
+btnStop=Button(window, text='Stop', height=1, width=20, command=Stop)
 btnReset=Button(window, text='Reset', height=1, width=20, command=Reset)
 
 #Places buttons in correct positions
