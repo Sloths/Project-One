@@ -8,10 +8,17 @@ window.title('Sloths Virtual Robot')
 window.geometry('{}x{}'. format(874,568))
 window.resizable(width=FALSE, height=FALSE)
 
+#Reset Function
+def Reset():
+  canvas.delete("all")
+  lblTimer = Label(text = "00:00:00", font=('Helvetica', 20))
+  #Add Stop timer/robot code
+  #Add Remove robot code
+
 #Creating buttons
 btnStart=Button(window, text='Start', height=1, width=20) #Add command once coded
 btnStop=Button(window, text='Stop', height=1, width=20) #Add command once coded
-btnReset=Button(window, text='Reset', height=1, width=20) #Add command once coded
+btnReset=Button(window, text='Reset', height=1, width=20, command=Reset)
 
 #Places buttons in correct positions
 btnStart.place(x=11, y=500)
