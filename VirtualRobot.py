@@ -65,13 +65,13 @@ def Start():
         count_forward = 0
 
         # robot and object detection and response
-        if rx1 > (ox2 - 10) and rx1 < (ox2 + 10) and ry1 < oy1 and ry1 > oy2: # right side of object
+        if rx1 > (o1x2 - 10) and rx1 < (o1x2 + 10) and ry1 < o1y1 and ry1 > o1y2: # right side of object
             count_forward = 5
-        if rx2 < (ox1 + 10) and rx2 > (ox1 - 10) and ry1 > oy1 and ry2 < oy2: # left side of object
+        if rx2 < (o1x1 + 10) and rx2 > (o1x1 - 10) and ry1 > o1y1 and ry2 < o1y2: # left side of object
             count = 5
-        if ry2 > (oy1 - 10) and ry2 < (oy1 + 10) and rx1 > ox1 and rx1 < ox2: # top side of object
+        if ry2 > (o1y1 - 10) and ry2 < (o1y1 + 10) and rx1 > o1x1 and rx1 < o1x2: # top side of object
             count_forward = 0
-        if ry1 < (oy2 + 10) and ry1 > (oy2 - 10) and rx1 > ox1 and rx1 < ox2: # bottom side of object
+        if ry1 < (o1y2 + 10) and ry1 > (o1y2 - 10) and rx1 > o1x1 and rx1 < o1x2: # bottom side of object
             count = 5
 
         # action performed from count and count_forward
