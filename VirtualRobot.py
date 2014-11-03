@@ -13,6 +13,7 @@ window.resizable(width=FALSE, height=FALSE)
 
 #Start Function
 def Start():
+    
     # create screen boundaries
     x_min = 0.0
     y_min = 0.0
@@ -24,14 +25,18 @@ def Start():
     vy = 5.0 # y velocity
 
     # create robot
-    rb1 = canvas.create_rectangle(40, 80, 40 + 10, 80 + 10, fill = "red")
-
-    Map1()
+    rb1 = canvas.create_rectangle(40, 80, 50, 90, fill = "red")
     
     # create test obstacle
     #ob_x1 = random.randint(0, 854 - 50) # generate random x1 value
-    #ob_y1 = random.randint(0, 480 - 50) # generate random y1 value
-    #ob1 = canvas.create_rectangle(ob_x1, ob_y1, ob_x1 + 50, ob_y1 + 50, fill = "green")
+    #ob_y1 = random.randint(0, 480 - 5 0) # generate random y1 value
+
+    #Generate Map 1
+    ob1=canvas.create_rectangle(100, 100, 200, 170,fill='white', width=3)
+    ob2=canvas.create_rectangle(754, 100, 654, 170,fill='white', width=3)
+    ob3=canvas.create_rectangle(550, 280, 300, 200,fill='white', width=3)
+    ob4=canvas.create_rectangle(100, 380, 200, 310,fill='white', width=3)
+    ob5=canvas.create_rectangle(754, 380, 654, 310,fill='white', width=3)
 
     programRunning = True
 
