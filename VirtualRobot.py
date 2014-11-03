@@ -37,6 +37,11 @@ def Start():
     #ob_x1 = random.randint(0, 854 - 50) # generate random x1 value
     #ob_y1 = random.randint(0, 480 - 5 0) # generate random y1 value
 
+    # Random Respawn of Robot
+    rbx = random.randrange(0, 854, 1)
+    rby = random.randrange(0,480, 1)
+    rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "red")
+
     #Generate Map 1
     ob1=canvas.create_rectangle(100, 100, 200, 170,fill='white', width=3)
     ob2=canvas.create_rectangle(754, 100, 654, 170,fill='white', width=3)
