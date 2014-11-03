@@ -110,3 +110,74 @@ cmbMap.place(x=712, y=500)
 canvas.pack(padx=10,pady=10)
 
 window.mainloop()
+
+
+# map 1 start
+from Tkinter import *
+
+window = Tk ()
+canvas = Canvas (window, width=854, height=480, bg='white')
+
+objectrectangle=canvas.create_rectangle(854, 3, 3, 480, fill='white', width=3)
+canvas.pack()
+
+
+# The coordonate for objects ......... (x1-axis  y1-axis  x2-width  y2-height)
+objectrectangle=canvas.create_rectangle(100, 100, 200, 170,fill='white', width=3)
+
+objectrectangle=canvas.create_rectangle(754, 100, 654, 170,fill='white', width=3)
+
+objectrectangle=canvas.create_rectangle(550, 280, 300, 200,fill='white', width=3)
+
+objectrectangle=canvas.create_rectangle(100, 380, 200, 310,fill='white', width=3)
+
+objectrectangle=canvas.create_rectangle(754, 380, 654, 310,fill='white', width=3)
+
+
+window.mainloop()
+# map 1 end
+
+
+
+# map 2 start
+from Tkinter import *
+
+window = Tk ()
+canvas = Canvas (window, width=854, height=480, bg='white')
+canvas.pack()
+
+objectrectangle=canvas.create_rectangle(854, 3, 3, 480, fill='white', width=3)
+
+
+# 1 line of objects from left to right
+# The coordonate for objects .....(x1-axis  y1-axis  x2-width  y2-height)
+
+objectrectangle=canvas.create_rectangle(50, 40, 130, 200, fill='white', width=3)
+
+objectrectangle=canvas.create_rectangle(180, 140, 310, 85, fill='white', width=3)
+
+objectrectangle=canvas.create_rectangle(390, 40, 470, 110, fill='white', width=3)
+
+objectrectangle=canvas.create_rectangle(550, 110, 800, 60, fill='white', width=3)
+
+
+# 2 line of objects from left to right
+# The coordonate for objects .....(x1-axis  y1-axis  x2-width  y2-height)
+
+objectrectangle=canvas.create_rectangle(240, 250, 300, 200, fill='white', width=3)
+
+objectrectangle=canvas.create_rectangle(390, 190, 470, 400, fill='white', width=3)
+
+objectrectangle=canvas.create_rectangle(570, 170, 700, 250, fill='white', width=3)
+
+
+# 3 line of objects from left to right
+# The coordonate for objects .....(x1-axis  y1-axis  x2-width  y2-height)
+
+objectrectangle=canvas.create_rectangle(50, 330, 330, 400, fill='white', width=3)
+
+objectrectangle=canvas.create_rectangle(550, 330, 800, 400, fill='white', width=3)
+
+
+window.mainloop()
+# map 2 end
