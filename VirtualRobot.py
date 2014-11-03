@@ -25,7 +25,10 @@ def Start():
     vy = 5.0 # y velocity
 
     # create robot
-    rb1 = canvas.create_rectangle(40, 80, 50, 90, fill = "red")
+    # respawn
+    rbx = random.randrange(0, 854, 1)
+    rby = random.randrange(0,480, 1)
+    rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "red")
     
     # create test obstacle
     #ob_x1 = random.randint(0, 854 - 50) # generate random x1 value
