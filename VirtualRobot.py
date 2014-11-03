@@ -13,7 +13,7 @@ window.resizable(width=FALSE, height=FALSE)
 
 #Start Function
 def Start():
-  # create screen boundaries
+    # create screen boundaries
     x_min = 0.0
     y_min = 0.0
     x_max = 854.0
@@ -26,10 +26,12 @@ def Start():
     # create robot
     rb1 = canvas.create_rectangle(40, 80, 40 + 10, 80 + 10, fill = "red")
 
+    Map1()
+    
     # create test obstacle
-    ob_x1 = random.randint(0, 854 - 50) # generate random x1 value
-    ob_y1 = random.randint(0, 480 - 50) # generate random y1 value
-    ob1 = canvas.create_rectangle(ob_x1, ob_y1, ob_x1 + 50, ob_y1 + 50, fill = "green")
+    #ob_x1 = random.randint(0, 854 - 50) # generate random x1 value
+    #ob_y1 = random.randint(0, 480 - 50) # generate random y1 value
+    #ob1 = canvas.create_rectangle(ob_x1, ob_y1, ob_x1 + 50, ob_y1 + 50, fill = "green")
 
     programRunning = True
 
@@ -37,7 +39,11 @@ def Start():
 
         # create shape coordinates
         rx1, ry1, rx2, ry2 = canvas.coords(rb1) # robot
-        ox1, oy1, ox2, oy2 = canvas.coords(ob1) # object
+        o1x1, o1y1, o1x2, o1y2 = canvas.coords(ob1) # object 1
+        o2x1, o2y1, o2x2, o2y2 = canvas.coords(ob2) # object 2
+        o3x1, o3y1, o3x2, o3y2 = canvas.coords(ob3) # object 3
+        o4x1, o4y1, o4x2, o4y2 = canvas.coords(ob4) # object 4
+        o5x1, o5y1, o5x2, o5y2 = canvas.coords(ob5) # object 5
 
         # robot boundary detection and response
         if rx1 <= x_min + 10:
@@ -83,10 +89,19 @@ def Start():
 
 #Reset Function
 def Reset():
-  canvas.delete("all")
-  lblTimer = Label(text = "00:00:00", font=('Helvetica', 20))
-  #Add Stop timer/robot code
-  #Add Remove robot code
+    canvas.delete("all")
+    lblTimer = Label(text = "00:00:00", font=('Helvetica', 20))
+    #Add Stop timer/robot code
+    #Add Remove robot code
+
+#Map 1 Function
+def Map1():
+    canvas.delete("all")
+    ob1=canvas.create_rectangle(100, 100, 200, 170,fill='white', width=3)
+    ob2=canvas.create_rectangle(754, 100, 654, 170,fill='white', width=3)
+    ob3=canvas.create_rectangle(550, 280, 300, 200,fill='white', width=3)
+    ob4=canvas.create_rectangle(100, 380, 200, 310,fill='white', width=3)
+    ob5=canvas.create_rectangle(754, 380, 654, 310,fill='white', width=3)
 
 #Creating buttons
 btnStart=Button(window, text='Start', height=1, width=20, command=Start)
@@ -110,74 +125,3 @@ cmbMap.place(x=712, y=500)
 canvas.pack(padx=10,pady=10)
 
 window.mainloop()
-
-
-# map 1 start
-from Tkinter import *
-
-window = Tk ()
-canvas = Canvas (window, width=854, height=480, bg='white')
-
-objectrectangle=canvas.create_rectangle(854, 3, 3, 480, fill='white', width=3)
-canvas.pack()
-
-
-# The coordonate for objects ......... (x1-axis  y1-axis  x2-width  y2-height)
-objectrectangle=canvas.create_rectangle(100, 100, 200, 170,fill='white', width=3)
-
-objectrectangle=canvas.create_rectangle(754, 100, 654, 170,fill='white', width=3)
-
-objectrectangle=canvas.create_rectangle(550, 280, 300, 200,fill='white', width=3)
-
-objectrectangle=canvas.create_rectangle(100, 380, 200, 310,fill='white', width=3)
-
-objectrectangle=canvas.create_rectangle(754, 380, 654, 310,fill='white', width=3)
-
-
-window.mainloop()
-# map 1 end
-
-
-
-# map 2 start
-from Tkinter import *
-
-window = Tk ()
-canvas = Canvas (window, width=854, height=480, bg='white')
-canvas.pack()
-
-objectrectangle=canvas.create_rectangle(854, 3, 3, 480, fill='white', width=3)
-
-
-# 1 line of objects from left to right
-# The coordonate for objects .....(x1-axis  y1-axis  x2-width  y2-height)
-
-objectrectangle=canvas.create_rectangle(50, 40, 130, 200, fill='white', width=3)
-
-objectrectangle=canvas.create_rectangle(180, 140, 310, 85, fill='white', width=3)
-
-objectrectangle=canvas.create_rectangle(390, 40, 470, 110, fill='white', width=3)
-
-objectrectangle=canvas.create_rectangle(550, 110, 800, 60, fill='white', width=3)
-
-
-# 2 line of objects from left to right
-# The coordonate for objects .....(x1-axis  y1-axis  x2-width  y2-height)
-
-objectrectangle=canvas.create_rectangle(240, 250, 300, 200, fill='white', width=3)
-
-objectrectangle=canvas.create_rectangle(390, 190, 470, 400, fill='white', width=3)
-
-objectrectangle=canvas.create_rectangle(570, 170, 700, 250, fill='white', width=3)
-
-
-# 3 line of objects from left to right
-# The coordonate for objects .....(x1-axis  y1-axis  x2-width  y2-height)
-
-objectrectangle=canvas.create_rectangle(50, 330, 330, 400, fill='white', width=3)
-
-objectrectangle=canvas.create_rectangle(550, 330, 800, 400, fill='white', width=3)
-
-
-window.mainloop()
-# map 2 end
