@@ -31,10 +31,6 @@ def Start():
     # set movement velocity
     vx = 10.0 # x velocity
     vy = 5.0 # y velocity
-
-
-    # create robot
-    rb1 = canvas.create_rectangle(40, 80, 50, 90, fill = "red")
     
     # create test obstacle
     #ob_x1 = random.randint(0, 854 - 50) # generate random x1 value
