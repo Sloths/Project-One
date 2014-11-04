@@ -11,6 +11,8 @@ window.title('Sloths Virtual Robot')
 window.geometry('{}x{}'. format(874,568))
 window.resizable(width=FALSE, height=FALSE)
 
+countdown = 60
+
 #Stop Function defined as Global 
 def Stop():
     global programRunning
@@ -48,6 +50,30 @@ def Start():
     ob3=canvas.create_rectangle(550, 280, 300, 200,fill='white', width=3)
     ob4=canvas.create_rectangle(100, 380, 200, 310,fill='white', width=3)
     ob5=canvas.create_rectangle(754, 380, 654, 310,fill='white', width=3)
+
+    #Countdown function
+    def counter_label(label):
+      countdown = 60
+      def count():
+        global countdown
+        global programRunning
+        #Decrease countdown by 1
+        countdown -= 1
+        if countdown <= 0:
+          programRunning = False
+          label.config(text=str(countdown))
+        elif countdown > 0:
+          programRunning = True
+          label.config(text=str(countdown))
+          #after a thousand ticks call count function 
+          label.after(1000, count)
+      count()
+
+    #Creating countdown label
+    label= tk.Label(font=('Helvetica', 20))
+    label.place(x=400, y=500)
+    label.pack()
+    counter_label(label)
 
 #Define as a global variable once to keep using
     global programRunning
