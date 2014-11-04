@@ -73,6 +73,39 @@ def Start():
           label.config(text=str(countdown))
           #after a thousand ticks call count function 
           label.after(1000, count)
+          #random colour change 
+        if countdown **5:
+          red = random.randrange(1,5,1)
+          if red == 1:
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red', width=3)
+            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green', width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green', width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green', width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green', width=3)
+          elif red ==2:
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green', width=3)
+            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red', width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green', width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green', width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green', width=3)
+          elif red ==3:
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green', width=3)
+            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green', width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red', width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green', width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green', width=3)
+          elif red==4:
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green', width=3)
+            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green', width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green', width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red', width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green', width=3)
+          elif red==5:
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green', width=3)
+            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green', width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green', width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green', width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red', width=3)
       count()
     counter_label(label)
    
