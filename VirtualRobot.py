@@ -2,6 +2,7 @@ from Tkinter import *
 import ttk
 import random
 import time
+import Tkinter as tk
 
 #Creating window and canvas
 window = Tk()
@@ -134,9 +135,7 @@ def Start():
 #Reset Function
 def Reset():
     canvas.delete("all")
-    lblTimer = Label(text = "00:00:00", font=('Helvetica', 20))
-    #Add Stop timer/robot code
-    #Add Remove robot code
+    
 
 #Map 1 Function
 def Map1():
@@ -156,10 +155,6 @@ btnReset=Button(window, text='Reset', height=1, width=20, command=Reset)
 btnStart.place(x=11, y=500)
 btnStop.place(x=11, y=530)
 btnReset.place(x=712, y=530)
-
-#Creating label and positioning
-lblTimer=Label(text='00:00:00', font=('Helvetica', 20))
-lblTimer.place(x=400, y=500)
 
 #Creating ComboBox
 cmbMap=ttk.Combobox(window, values=["Map 1", "Map 2", "Map 3", "Map 4", "Map 5", "Map 6"], height=1, width=21) #Add command once coded
