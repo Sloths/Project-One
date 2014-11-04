@@ -317,6 +317,10 @@ def Start():
             count = 5
 
         # action performed from count and count_forward
+        count = 0
+        count_forward = 0
+        global count
+        global count_forward
         if count > 0:
             vx = -10.0
             vy = 5.0
