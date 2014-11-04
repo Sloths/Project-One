@@ -18,6 +18,13 @@ countdown = 60
 def Stop():
     global programRunning
     programRunning = False
+ #stopping timer   
+    global countdown
+    countdown = 1
+ #Deleting robot    
+    global rb1
+    canvas.delete(rb1)
+    
     
 #Start Function
 def Start():
@@ -39,6 +46,7 @@ def Start():
     # Random Respawn of Robot
     rbx = random.randrange(0, 854, 1)
     rby = random.randrange(0,480, 1)
+    global rb1
     rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "red")
 
     #Generate Map 1
@@ -50,6 +58,7 @@ def Start():
 
     #Countdown function
     def counter_label(label):
+      global countdown
       countdown = 60
       def count():
         global countdown
@@ -65,12 +74,8 @@ def Start():
           #after a thousand ticks call count function 
           label.after(1000, count)
       count()
-
-    #Creating countdown label
-    label= tk.Label(font=('Helvetica', 20))
-    label.place(x=400, y=500)
-    label.pack()
     counter_label(label)
+   
 
 #Define as a global variable once to keep using
     global programRunning
@@ -151,6 +156,12 @@ btnReset=Button(window, text='Reset', height=1, width=20, command=Reset)
 btnStart.place(x=11, y=500)
 btnStop.place(x=11, y=530)
 btnReset.place(x=712, y=530)
+
+#Creating countdown label
+label= tk.Label(font=('Helvetica', 20))
+label.place(x=400, y=500)
+label.pack()
+
 
 #Creating ComboBox
 cmbMap=ttk.Combobox(window, values=["Map 1", "Map 2", "Map 3", "Map 4", "Map 5", "Map 6"], height=1, width=21) #Add command once coded
