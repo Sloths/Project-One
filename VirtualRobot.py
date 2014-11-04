@@ -12,23 +12,21 @@ window.title('Sloths Virtual Robot')
 window.geometry('{}x{}'. format(874,568))
 window.resizable(width=FALSE, height=FALSE)
 
-countdown = 60
+countdown = 61
 
 #Stop Function defined as Global 
 def Stop():
     global programRunning
     programRunning = False
- #stopping timer   
+    #stopping timer   
     global countdown
     countdown = 1
- #Deleting robot    
+    #Deleting robot    
     global rb1
     canvas.delete(rb1)
     
-    
 #Start Function
 def Start():
-    
     # create screen boundaries
     x_min = 0.0
     y_min = 0.0
@@ -38,10 +36,6 @@ def Start():
     # set movement velocity
     vx = 10.0 # x velocity
     vy = 5.0 # y velocity
-    
-    # create test obstacle
-    #ob_x1 = random.randint(0, 854 - 50) # generate random x1 value
-    #ob_y1 = random.randint(0, 480 - 5 0) # generate random y1 value
 
     # Random Respawn of Robot
     rbx = random.randrange(0, 854, 1)
@@ -59,7 +53,7 @@ def Start():
     #Countdown function
     def counter_label(label):
       global countdown
-      countdown = 60
+      countdown = 61
       def count():
         global countdown
         global programRunning
@@ -74,7 +68,7 @@ def Start():
           #after a thousand ticks call count function 
           label.after(1000, count)
           #random colour change 
-        if countdown **5:
+        if countdown % 5 == 0:
           red = random.randrange(1,5,1)
           if red == 1:
             ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red', width=3)
@@ -110,7 +104,7 @@ def Start():
     counter_label(label)
    
 
-#Define as a global variable once to keep using
+    #Define as a global variable once to keep using
     global programRunning
     programRunning = True
 
@@ -342,8 +336,7 @@ def Start():
 
 #Reset Function
 def Reset():
-    canvas.delete("all")
-    
+    canvas.delete("all") 
 
 #Map 1 Function
 def Map1():
@@ -368,7 +361,6 @@ btnReset.place(x=712, y=530)
 label= tk.Label(font=('Helvetica', 20))
 label.place(x=400, y=500)
 label.pack()
-
 
 #Creating ComboBox
 cmbMap=ttk.Combobox(window, values=["Map 1", "Map 2", "Map 3", "Map 4", "Map 5", "Map 6"], height=1, width=21) #Add command once coded
