@@ -306,30 +306,6 @@ def Start():
                 vx = -10.0
                 vy = 5.0
 
-        # robot and object detection and response
-        if rx1 > (o1x2 - 10) and rx1 < (o1x2 + 10) and ry1 < o1y1 and ry1 > o1y2: # right side of object
-            count_forward = 5
-        if rx2 < (o1x1 + 10) and rx2 > (o1x1 - 10) and ry1 > o1y1 and ry2 < o1y2: # left side of object
-            count = 5
-        if ry2 > (o1y1 - 10) and ry2 < (o1y1 + 10) and rx1 > o1x1 and rx1 < o1x2: # top side of object
-            count_forward = 0
-        if ry1 < (o1y2 + 10) and ry1 > (o1y2 - 10) and rx1 > o1x1 and rx1 < o1x2: # bottom side of object
-            count = 5
-
-        # action performed from count and count_forward
-        count = 0
-        count_forward = 0
-        global count
-        global count_forward
-        if count > 0:
-            vx = -10.0
-            vy = 5.0
-            count = count - 1
-        if count_forward > 0:
-            vx = 10.0
-            vy = -5.0
-            count_forward = count_forward - 1
-
         # reposition moving objects
         canvas.coords(rb1, rx1 + vx, ry1 + vy, rx2 + vx, ry2 + vy)
         canvas.update()
