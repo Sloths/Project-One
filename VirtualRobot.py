@@ -18,6 +18,8 @@ countdown = 61
 #loading images
 gif1 = PhotoImage(file="image1.gif")
 gif2 = PhotoImage(file="image2.gif")
+gif3 = PhotoImage(file="image3.gif")
+gif4 = PhotoImage(file="image4.gif")
 
 #Stop Function defined as Global 
 def Stop():
@@ -50,7 +52,7 @@ def Start():
     global rb1
     # creation of the robot
     rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "blue", outline='blue')
-
+    
     #Generate Map 1
     ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green', width=3)
     ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green', width=3)
@@ -487,7 +489,7 @@ def Start():
 
 #Reset Function
 def Reset():
-    canvas.delete("all") 
+    canvas.delete("img") 
 
 #Map 1 Function
 def Map1():
@@ -498,6 +500,20 @@ def Map1():
     ob4=canvas.create_rectangle(100, 380, 200, 310,fill='white', width=3)
     ob5=canvas.create_rectangle(754, 380, 654, 310,fill='white', width=3)
 
+#Loading image functions
+def Image1():
+    global gif1
+    image1=canvas.create_image(0,0,image=gif1,anchor="nw",tag="img")
+def Image2():
+    global gif2
+    image2=canvas.create_image(0,0,image=gif2,anchor="nw",tag="img")
+def Image3():
+    global gif3
+    image3=canvas.create_image(0,0,image=gif3,anchor="nw",tag="img")
+def Image4():
+    global gif4
+    image4=canvas.create_image(0,0,image=gif4,anchor="nw",tag="img")
+                               
 #Creating buttons
 btnStart=Button(window, text='Start', height=1, width=20, command=Start)
 btnStop=Button(window, text='Stop', height=1, width=20, command=Stop)
@@ -513,26 +529,17 @@ label= tk.Label(font=('Helvetica', 20))
 label.place(x=400, y=500)
 label.pack()
 
-#Loading image functions
-def Image1():
-    global canvas
-    global gif1
-    image1=canvas.create_image(0,0,image=gif1)
-
-def Image2():
-    global canvas
-    global gif2
-    image2=canvas.create_image(0,0,image=gif2
-
 #Creating image buttons
-btn1=Button(window, text="1", height=1, width=1, command=Image1)
-btn2=Button(window, text="2", height=1, width=1)
-btn3=Button(window,text="3", height=1, width=1)
+btnMap1=Button(window, text="1", height=1, width=2, command=Image1)
+btnMap2=Button(window, text="2", height=1, width=2, command=Image2)
+btnMap3=Button(window,text="3", height=1, width=2, command=Image3)
+btnMap4=Button(window,text="4", height=1, width=2, command=Image4)
 
-#Placement of buttons
-btn1.place(x=712, y=500)
-btn2.place(x=732, y=500)
-btn3.place(x=752, y=500)
+#Placement of image buttons
+btnMap1.place(x=712, y=500)
+btnMap2.place(x=754, y=500)
+btnMap3.place(x=797, y=500)
+btnMap4.place(x=837, y=500)
 
 #Padds canvas
 canvas.pack(padx=10,pady=10)
