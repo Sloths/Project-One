@@ -41,14 +41,14 @@ def Start():
     rbx = random.randrange(0, 854, 1)
     rby = random.randrange(0,480, 1)
     global rb1
-    rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "red")
+    rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "blue", outline='blue')
 
     #Generate Map 1
-    ob1=canvas.create_rectangle(100, 100, 200, 170,fill='white', width=3)
-    ob2=canvas.create_rectangle(754, 100, 654, 170,fill='white', width=3)
-    ob3=canvas.create_rectangle(550, 280, 300, 200,fill='white', width=3)
-    ob4=canvas.create_rectangle(100, 380, 200, 310,fill='white', width=3)
-    ob5=canvas.create_rectangle(754, 380, 654, 310,fill='white', width=3)
+    ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green', width=3)
+    ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green', width=3)
+    ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green', width=3)
+    ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green', width=3)
+    ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green', width=3)
 
     #Countdown function
     def counter_label(label):
@@ -62,7 +62,6 @@ def Start():
         if countdown <= 0:
           programRunning = False
           label.config(text=str(countdown))
-          canvas.delete(rb1)
         elif countdown > 0:
           programRunning = True
           label.config(text=str(countdown))
@@ -72,35 +71,35 @@ def Start():
         if countdown % 5 == 0:
           red = random.randrange(1,5,1)
           if red == 1:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red', width=3)
-            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green', width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green', width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green', width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green', width=3)
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red',outline='red',width=3)
+            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green',outline='green',width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green',outline='green',width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green',outline='green',width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green',outline='green',width=3)
           elif red ==2:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green', width=3)
-            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red', width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green', width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green', width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green', width=3)
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green',outline='green',width=3)
+            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red',outline='red',width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green',outline='green',width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green',outline='green',width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green',outline='green',width=3)
           elif red ==3:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green', width=3)
-            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green', width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red', width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green', width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green', width=3)
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green',outline='green',width=3)
+            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green',outline='green',width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red',outline='red',width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green',outline='green',width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green',outline='green',width=3)
           elif red==4:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green', width=3)
-            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green', width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green', width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red', width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green', width=3)
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green',outline='green', width=3)
+            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green',outline='green', width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green',outline='green', width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red',outline='red', width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green',outline='green', width=3)
           elif red==5:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green', width=3)
-            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green', width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green', width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green', width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red', width=3)
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green',outline='green', width=3)
+            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green',outline='green', width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green',outline='green', width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green',outline='green', width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red',outline='red', width=3)
       count()
     counter_label(label)
    
