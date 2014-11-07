@@ -62,6 +62,7 @@ def Start():
         if countdown <= 0:
           programRunning = False
           label.config(text=str(countdown))
+          canvas.delete(rb1)
         elif countdown > 0:
           programRunning = True
           label.config(text=str(countdown))
