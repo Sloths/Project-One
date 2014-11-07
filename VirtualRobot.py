@@ -15,6 +15,10 @@ window.resizable(width=FALSE, height=FALSE)
 #countdown is set to 61 seconds
 countdown = 61
 
+#loading images
+gif1 = PhotoImage(file="image1.gif")
+gif2 = PhotoImage(file="image2.gif")
+
 #Stop Function defined as Global 
 def Stop():
     global programRunning
@@ -509,9 +513,26 @@ label= tk.Label(font=('Helvetica', 20))
 label.place(x=400, y=500)
 label.pack()
 
-#Creating ComboBox
-cmbMap=ttk.Combobox(window, values=["Map 1", "Map 2", "Map 3", "Map 4", "Map 5", "Map 6"], height=1, width=21) #Add command once coded
-cmbMap.place(x=712, y=500)
+#Loading image functions
+def Image1():
+    global canvas
+    global gif1
+    image1=canvas.create_image(0,0,image=gif1)
+
+def Image2():
+    global canvas
+    global gif2
+    image2=canvas.create_image(0,0,image=gif2
+
+#Creating image buttons
+btn1=Button(window, text="1", height=1, width=1, command=Image1)
+btn2=Button(window, text="2", height=1, width=1)
+btn3=Button(window,text="3", height=1, width=1)
+
+#Placement of buttons
+btn1.place(x=712, y=500)
+btn2.place(x=732, y=500)
+btn3.place(x=752, y=500)
 
 #Padds canvas
 canvas.pack(padx=10,pady=10)
