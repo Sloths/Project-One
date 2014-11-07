@@ -12,6 +12,7 @@ window.title('Sloths Virtual Robot')
 window.geometry('{}x{}'. format(874,568))
 window.resizable(width=FALSE, height=FALSE)
 
+#countdown is set to 61 seconds
 countdown = 61
 
 #Stop Function defined as Global 
@@ -38,9 +39,12 @@ def Start():
     vy = 5.0 # y velocity
 
     # Random Respawn of Robot
+    # random x coordinate selected from the range
     rbx = random.randrange(0, 854, 1)
+    # random y coordinate selected from the range
     rby = random.randrange(0,480, 1)
     global rb1
+    # creation of the robot
     rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "blue", outline='blue')
 
     #Generate Map 1
@@ -67,8 +71,9 @@ def Start():
           label.config(text=str(countdown))
           #after a thousand ticks call count function 
           label.after(1000, count)
-          #random colour change 
+          #random colour change of objects every 5 seconds
         if countdown % 5 == 0:
+          # randomly select an object to turn red in the range
           red = random.randrange(1,5,1)
           if red == 1:
             ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red',outline='red',width=3)
