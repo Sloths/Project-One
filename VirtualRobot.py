@@ -54,11 +54,17 @@ def Start():
     rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "blue", outline='blue')
     
     #Generate Map 1
+    global ob1
     ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green', width=3)
+    global ob2
     ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green', width=3)
+    global ob3
     ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green', width=3)
+    global ob4
     ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green', width=3)
+    global ob5
     ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green', width=3)
+
 
     #Countdown function
     def counter_label(label):
@@ -121,13 +127,8 @@ def Start():
 
     while programRunning == True:  
 
-        # create shape coordinates
-        rx1, ry1, rx2, ry2 = canvas.coords(rb1) # robot
-        o1x1, o1y1, o1x2, o1y2 = canvas.coords(ob1) # object 1
-        o2x1, o2y1, o2x2, o2y2 = canvas.coords(ob2) # object 2
-        o3x1, o3y1, o3x2, o3y2 = canvas.coords(ob3) # object 3
-        o4x1, o4y1, o4x2, o4y2 = canvas.coords(ob4) # object 4
-        o5x1, o5y1, o5x2, o5y2 = canvas.coords(ob5) # object 5
+        # create shape coordinates        
+        rx1, ry1, rx2, ry2 = canvas.coords(rb1)
 
         # robot boundary detection and response
         if rx1 <= x_min + 10:
@@ -137,355 +138,53 @@ def Start():
         if rx2 >= x_max - 10:
             vx = -10.0
         if ry2 >= y_max - 10:
-            vy = -5.0
-            
-        ''' COLLISION RELATED CODE '''
-
-        # robot boundary detection and response
-        if rx1 <= x_min + 10:
-            vx = 10.0
-        if ry1 <= y_min + 10:
-            vy = 5.0
-        if rx2 >= x_max - 10:
-            vx = -10.0
-        if ry2 >= y_max - 10:
-            vy = -5.0
-        
+            vy = -5.0        
         
         global red
+             
+        objList = [ob1, ob2, ob3, ob4, ob5]
         
-        # robot and object 1 detection and response
-        if rx1 > (o1x2 - 10) and rx1 < (o1x2 + 10) and ry1 > o1y1 and ry1 < o1y2: # right side of object
-            if vy == 5.0 and vx == -10.0:
-                if red == 1: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = 10.0
-                if red != 1: # object is not solid and robot passes through
-                    vy = 5.0
-                    vx = -10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 1: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = 10.0
-                if red != 1: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = -10.0
+        for o in objList:
+            x1, y1, x2, y2 = canvas.coords(o)
             
-        if rx2 < (o1x1 + 10) and rx2 > (o1x1 - 10) and ry1 > o1y1 and ry2 < o1y2: # left side of object
-            if vy == 5.0 and vx == 10.0:
-                if red == 1: # object is solid and robot bounces off
+            if rx1 > (x2 - 10) and rx1 < (x2 + 10) and ry1 > y1 and ry1 < y2: # right side of object
+                if vy == 5.0 and vx == -10.0:
                     vy = 5.0
-                    vx = -10.0
-                if red != 1: # object is not solid and robot passes through
-                    vy = 5.0
-                    vx = 10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 1: # object is solid and robot bounces off
+                    vx = 10.0                   
+                if vy == -5.0 and vx == -10.0:
                     vy = -5.0
-                    vx = 10.0
-                if red != 1: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = -10.0
+                    vx = 10.0                    
             
-        if ry2 > (o1y1 - 10) and ry2 < (o1y1 + 10) and rx1 > o1x1 and rx1 < o1x2: # top side of object
-            if vy == 5.0 and vy == 10.0:
-                if red == 1: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = 10.0
-                if red != 1: # object is not solid and robot passes through
+            if rx2 < (x1 + 10) and rx2 > (x1 - 10) and ry1 > y1 and ry2 < y2: # left side of object
+                if vy == 5.0 and vx == 10.0:
                     vy = 5.0
-                    vx = 10.0
-            if vy == 5.0 and vx == -10.0:
-                if red == 1: # object is solid and robot bounces off
+                    vx = -10.0                    
+                if vy == -5.0 and vx == -10.0:
                     vy = -5.0
-                    vx = -10.0
-                if red != 1: # object is not solid and robot passes through                  
-                    vy = 5.0
-                    vx = -10.0
-                
-        if ry1 < (o1y2 + 10) and ry1 > (o1y2 - 10) and rx1 > o1x1 and rx1 < o1x2: # bottom side of object
-            if vx == 10.0 and vy == -5.0:
-                if red == 1: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = 10.0
-                if red != 1: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = 10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 1: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = -10.0
-                if red != 1: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = 10.0
-
-        # robot and object 2 detection and response
-        if rx1 > (o2x2 - 10) and rx1 < (o2x2 + 10) and ry1 > o2y1 and ry1 < o2y2: # right side of object
-            if vy == 5.0 and vx == -10.0:
-                if red == 2: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = 10.0
-                if red != 2: # object is not solid and robot passes through
-                    vy = 5.0
-                    vx = -10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 2: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = 10.0
-                if red != 2: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = -10.0
+                    vx = 10.0                    
             
-        if rx2 < (o2x1 + 10) and rx2 > (o2x1 - 10) and ry1 > o2y1 and ry2 < o2y2: # left side of object
-            if vy == 5.0 and vx == 10.0:
-                if red == 2: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = -10.0
-                if red != 2: # object is not solid and robot passes through
-                    vy = 5.0
-                    vx = 10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 2: # object is solid and robot bounces off
+            if ry2 > (y1 - 10) and ry2 < (y1 + 10) and rx1 > x1 and rx1 < x2: # top side of object
+                if vy == 5.0 and vy == 10.0:
                     vy = -5.0
-                    vx = 10.0
-                if red != 2: # object is not solid and robot passes through
+                    vx = 10.0                    
+                if vy == 5.0 and vx == -10.0:
                     vy = -5.0
                     vx = -10.0
-            
-        if ry2 > (o2y1 - 10) and ry2 < (o2y1 + 10) and rx1 > o2x1 and rx1 < o2x2: # top side of object
-            if vy == 5.0 and vy == 10.0:
-                if red == 2: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = 10.0
-                if red != 2: # object is not solid and robot passes through
+                                    
+            if ry1 < (y2 + 10) and ry1 > (y2 - 10) and rx1 > x1 and rx1 < x2: # bottom side of object
+                if vx == 10.0 and vy == -5.0:
                     vy = 5.0
-                    vx = 10.0
-            if vy == 5.0 and vx == -10.0:
-                if red == 2: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = -10.0
-                if red != 2: # object is not solid and robot passes through                  
+                    vx = 10.0                    
+                if vy == -5.0 and vx == -10.0:
                     vy = 5.0
-                    vx = -10.0
-                
-        if ry1 < (o2y2 + 10) and ry1 > (o2y2 - 10) and rx1 > o2x1 and rx1 < o2x2: # bottom side of object
-            if vx == 10.0 and vy == -5.0:
-                if red == 2: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = 10.0
-                if red != 2: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = 10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 2: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = -10.0
-                if red != 2: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = 10.0
-
-        # robot and object 3 detection and response
-        if rx1 > (o3x2 - 10) and rx1 < (o3x2 + 10) and ry1 > o3y1 and ry1 < o3y2: # right side of object
-            if vy == 5.0 and vx == -10.0:
-                if red == 3: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = 10.0
-                if red != 3: # object is not solid and robot passes through
-                    vy = 5.0
-                    vx = -10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 3: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = 10.0
-                if red != 3: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = -10.0
-            
-        if rx2 < (o3x1 + 10) and rx2 > (o3x1 - 10) and ry1 > o3y1 and ry2 < o3y2: # left side of object
-            if vy == 5.0 and vx == 10.0:
-                if red == 3: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = -10.0
-                if red != 3: # object is not solid and robot passes through
-                    vy = 5.0
-                    vx = 10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 3: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = 10.0
-                if red != 3: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = -10.0
-            
-        if ry2 > (o3y1 - 10) and ry2 < (o3y1 + 10) and rx1 > o3x1 and rx1 < o3x2: # top side of object
-            if vy == 5.0 and vy == 10.0:
-                if red == 3: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = 10.0
-                if red != 3: # object is not solid and robot passes through
-                    vy = 5.0
-                    vx = 10.0
-            if vy == 5.0 and vx == -10.0:
-                if red == 3: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = -10.0
-                if red != 3: # object is not solid and robot passes through                  
-                    vy = 5.0
-                    vx = -10.0
-                
-        if ry1 < (o3y2 + 10) and ry1 > (o3y2 - 10) and rx1 > o3x1 and rx1 < o3x2: # bottom side of object
-            if vx == 10.0 and vy == -5.0:
-                if red == 3: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = 10.0
-                if red != 3: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = 10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 3: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = -10.0
-                if red != 3: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = 10.0
-
-        # robot and object 4 detection and response
-        if rx1 > (o4x2 - 10) and rx1 < (o4x2 + 10) and ry1 > o4y1 and ry1 < o4y2: # right side of object
-            if vy == 5.0 and vx == -10.0:
-                if red == 4: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = 10.0
-                if red != 4: # object is not solid and robot passes through
-                    vy = 5.0
-                    vx = -10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 4: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = 10.0
-                if red != 4: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = -10.0
-            
-        if rx2 < (o4x1 + 10) and rx2 > (o4x1 - 10) and ry1 > o4y1 and ry2 < o4y2: # left side of object
-            if vy == 5.0 and vx == 10.0:
-                if red == 4: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = -10.0
-                if red != 4: # object is not solid and robot passes through
-                    vy = 5.0
-                    vx = 10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 4: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = 10.0
-                if red != 4: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = -10.0
-            
-        if ry2 > (o4y1 - 10) and ry2 < (o4y1 + 10) and rx1 > o4x1 and rx1 < o4x2: # top side of object
-            if vy == 5.0 and vy == 10.0:
-                if red == 4: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = 10.0
-                if red != 4: # object is not solid and robot passes through
-                    vy = 5.0
-                    vx = 10.0
-            if vy == 5.0 and vx == -10.0:
-                if red == 4: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = -10.0
-                if red != 4: # object is not solid and robot passes through                  
-                    vy = 5.0
-                    vx = -10.0
-                
-        if ry1 < (o4y2 + 10) and ry1 > (o4y2 - 10) and rx1 > o4x1 and rx1 < o4x2: # bottom side of object
-            if vx == 10.0 and vy == -5.0:
-                if red == 4: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = 10.0
-                if red != 4: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = 10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 4: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = -10.0
-                if red != 4: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = 10.0
-
-        # robot and object 5 detection and response
-        if rx1 > (o5x2 - 10) and rx1 < (o5x2 + 10) and ry1 > o5y1 and ry1 < o5y2: # right side of object
-            if vy == 5.0 and vx == -10.0:
-                if red == 5: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = 10.0
-                if red != 5: # object is not solid and robot passes through
-                    vy = 5.0
-                    vx = -10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 5: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = 10.0
-                if red != 5: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = -10.0
-            
-        if rx2 < (o5x1 + 10) and rx2 > (o5x1 - 10) and ry1 > o5y1 and ry2 < o5y2: # left side of object
-            if vy == 5.0 and vx == 10.0:
-                if red == 5: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = -10.0
-                if red != 5: # object is not solid and robot passes through
-                    vy = 5.0
-                    vx = 10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 5: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = 10.0
-                if red != 5: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = -10.0
-            
-        if ry2 > (o5y1 - 10) and ry2 < (o5y1 + 10) and rx1 > o5x1 and rx1 < o5x2: # top side of object
-            if vy == 5.0 and vy == 10.0:
-                if red == 5: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = 10.0
-                if red != 5: # object is not solid and robot passes through
-                    vy = 5.0
-                    vx = 10.0
-            if vy == 5.0 and vx == -10.0:
-                if red == 5: # object is solid and robot bounces off
-                    vy = -5.0
-                    vx = -10.0
-                if red != 5: # object is not solid and robot passes through                  
-                    vy = 5.0
-                    vx = -10.0
-                
-        if ry1 < (o5y2 + 10) and ry1 > (o5y2 - 10) and rx1 > o5x1 and rx1 < o5x2: # bottom side of object
-            if vx == 10.0 and vy == -5.0:
-                if red == 5: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = 10.0
-                if red != 5: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = 10.0
-            if vy == -5.0 and vx == -10.0:
-                if red == 5: # object is solid and robot bounces off
-                    vy = 5.0
-                    vx = -10.0
-                if red != 5: # object is not solid and robot passes through
-                    vy = -5.0
-                    vx = 10.0
-
+                    vx = -10.0        
+        
         # reposition moving objects
         canvas.coords(rb1, rx1 + vx, ry1 + vy, rx2 + vx, ry2 + vy)
         canvas.update()
 
         # Sleep for 0.1 seconds, then delete the image.
-        time.sleep(0.1)  
-    
+        time.sleep(0.1)      
 
 #Reset Function
 def Reset():
