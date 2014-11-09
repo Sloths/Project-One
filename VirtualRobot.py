@@ -3,6 +3,7 @@ import ttk
 import random
 import time
 import Tkinter as tk
+import ctypes
 
 #Creating window and canvas
 window = Tk()
@@ -31,6 +32,11 @@ def Stop():
     #Deleting robot    
     global rb1
     canvas.delete(rb1)
+    #Enables buttons so user can change map once game has stopped
+    btnMap1.config(state='normal')
+    btnMap2.config(state='normal')
+    btnMap3.config(state='normal')
+    btnMap4.config(state='normal')
     
 #Start Function
 def Start():
@@ -65,6 +71,11 @@ def Start():
     global ob5
     ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green', width=3)
 
+    #Disables map buttons so user cannot change map while running
+    btnMap1.config(state='disabled')
+    btnMap2.config(state='disabled')
+    btnMap3.config(state='disabled')
+    btnMap4.config(state='disabled')
 
     #Countdown function
     def counter_label(label):
@@ -78,6 +89,13 @@ def Start():
         if countdown <= 0:
           programRunning = False
           label.config(text=str(countdown))
+          #Enables buttons so user can change map once game has stopped
+          btnMap1.config(state='normal')
+          btnMap2.config(state='normal')
+          btnMap3.config(state='normal')
+          btnMap4.config(state='normal')
+          #Message box to user
+          ctypes.windll.user32.MessageBoxA(0, "The timer has run out!", "Time up!", 0)
         elif countdown > 0:
           programRunning = True
           label.config(text=str(countdown))
@@ -231,8 +249,8 @@ label.pack()
 #Creating image buttons
 btnMap1=Button(window, text="1", height=1, width=2, command=Image1)
 btnMap2=Button(window, text="2", height=1, width=2, command=Image2)
-btnMap3=Button(window,text="3", height=1, width=2, command=Image3)
-btnMap4=Button(window,text="4", height=1, width=2, command=Image4)
+btnMap3=Button(window, text="3", height=1, width=2, command=Image3)
+btnMap4=Button(window, text="4", height=1, width=2, command=Image4)
 
 #Placement of image buttons
 btnMap1.place(x=712, y=500)
