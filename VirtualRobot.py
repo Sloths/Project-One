@@ -182,7 +182,7 @@ def Start():
                     vx = 10.0                    
             
             if ry2 > (y1 - 10) and ry2 < (y1 + 10) and rx1 > x1 and rx1 < x2: # top side of object
-                if vy == 5.0 and vy == 10.0:
+                if vy == 5.0 and vx == 10.0:
                     vy = -5.0
                     vx = 10.0                    
                 if vy == 5.0 and vx == -10.0:
