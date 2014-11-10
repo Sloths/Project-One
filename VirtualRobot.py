@@ -61,15 +61,15 @@ def Start():
     
     #Generate Map 1
     global ob1
-    ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red', width=3)
+    ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red', width=3, tag="0")
     global ob2
-    ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red', width=3)
+    ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red', width=3, tag="0")
     global ob3
-    ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red', width=3)
+    ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red', width=3, tag="0")
     global ob4
-    ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red', width=3)
+    ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red', width=3, tag="0")
     global ob5
-    ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red', width=3)
+    ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red', width=3, tag="0")
 
     #Disables map buttons so user cannot change map while running
     btnMap1.config(state='disabled')
@@ -84,6 +84,12 @@ def Start():
       def count():
         global countdown
         global programRunning
+        global ob1
+        global ob2
+        global ob3
+        global ob4
+        global ob5
+        global canvas
         #Decrease countdown by 1
         countdown -= 1
         if countdown <= 0:
@@ -103,44 +109,38 @@ def Start():
           label.after(1000, count)
           #random colour change of objects every 5 seconds
         if countdown % 5 == 0:
-          # randomly select an object to turn red in the range
-          red = random.randrange(1,5,1)
-          if red == 1:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red',outline='red',width=3)
-            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green',outline='green',width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green',outline='green',width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green',outline='green',width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green',outline='green',width=3)
-          elif red ==2:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green',outline='green',width=3)
-            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red',outline='red',width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red',outline='red',width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red',outline='red',width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red',outline='red',width=3)
-          elif red ==2:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red',outline='red',width=3)
-            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green',outline='green',width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red',outline='red',width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red',outline='red',width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red',outline='red',width=3)
-          elif red ==3:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red',outline='red',width=3)
-            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red',outline='red',width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green',outline='green',width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red',outline='red',width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red',outline='red',width=3)
-          elif red==4:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red',outline='red', width=3)
-            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red',outline='red', width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red',outline='red', width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green',outline='green', width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red',outline='red', width=3)
-          elif red==5:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red',outline='red', width=3)
-            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red',outline='red', width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red',outline='red', width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red',outline='red', width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green',outline='green', width=3)
+          # randomly select an object to turn green in the range
+          green = random.randrange(1,5,1)
+          if green == 1:
+            canvas.itemconfig(ob1, fill='green',outline='green',width=3, tag="1")
+            canvas.itemconfig(ob2, fill='red',outline='red',width=3, tag="0")
+            canvas.itemconfig(ob3, fill='red',outline='red',width=3, tag="0")
+            canvas.itemconfig(ob4, fill='red',outline='red',width=3, tag="0")
+            canvas.itemconfig(ob5, fill='red',outline='red',width=3, tag="0")
+          elif green == 2:
+            canvas.itemconfig(ob1, fill='red',outline='red',width=3, tag="0")
+            canvas.itemconfig(ob2, fill='green',outline='green',width=3, tag="1")
+            canvas.itemconfig(ob3, fill='red',outline='red',width=3, tag="0")
+            canvas.itemconfig(ob4, fill='red',outline='red',width=3, tag="0")
+            canvas.itemconfig(ob5, fill='red',outline='red',width=3, tag ="0")
+          elif green == 3:
+            canvas.itemconfig(ob1, fill='red',outline='red',width=3, tag="0")
+            canvas.itemconfig(ob2, fill='red',outline='red',width=3, tag="0")
+            canvas.itemconfig(ob3, fill='green',outline='green',width=3, tag="1")
+            canvas.itemconfig(ob4, fill='red',outline='red',width=3, tag="0")
+            canvas.itemconfig(ob5, fill='red',outline='red',width=3, tag="0")
+          elif green == 4:
+            canvas.itemconfig(ob1, fill='red',outline='red', width=3, tag="0")
+            canvas.itemconfig(ob2, fill='red',outline='red', width=3, tag="0")
+            canvas.itemconfig(ob3, fill='red',outline='red', width=3, tag="0")
+            canvas.itemconfig(ob4, fill='green',outline='green', width=3, tag="1")
+            canvas.itemconfig(ob5, fill='red',outline='red', width=3, tag="0")
+          elif green == 5:
+            canvas.itemconfig(ob1, fill='red',outline='red', width=3, tag="0")
+            canvas.itemconfig(ob2, fill='red',outline='red', width=3, tag="0")
+            canvas.itemconfig(ob3, fill='red',outline='red', width=3, tag="0")
+            canvas.itemconfig(ob4, fill='red',outline='red', width=3, tag="0")
+            canvas.itemconfig(ob5, fill='green',outline='green', width=3, tag="1")
       count()
     counter_label(label)
    
@@ -167,41 +167,48 @@ def Start():
         global red
              
         objList = [ob1, ob2, ob3, ob4, ob5]
+        greenCount = 1
         
         for o in objList:
             x1, y1, x2, y2 = canvas.coords(o)
             
-            if rx1 > (x2 - 10) and rx1 < (x2 + 10) and ry1 > y1 and ry1 < y2: # right side of object
-                if vy == 5.0 and vx == -10.0:
-                    vy = 5.0
-                    vx = 10.0                   
-                if vy == -5.0 and vx == -10.0:
-                    vy = -5.0
-                    vx = 10.0                    
+            objTag = str(canvas.gettags(o))
+            objTag = int(objTag[2])
+            print objTag
             
-            if rx2 < (x1 + 10) and rx2 > (x1 - 10) and ry1 > y1 and ry2 < y2: # left side of object
-                if vy == 5.0 and vx == 10.0:
-                    vy = 5.0
-                    vx = -10.0                    
-                if vy == -5.0 and vx == -10.0:
-                    vy = -5.0
-                    vx = 10.0                    
-            
-            if ry2 > (y1 - 10) and ry2 < (y1 + 10) and rx1 > x1 and rx1 < x2: # top side of object
-                if vy == 5.0 and vx == 10.0:
-                    vy = -5.0
-                    vx = 10.0                    
-                if vy == 5.0 and vx == -10.0:
-                    vy = -5.0
-                    vx = -10.0
-                                    
-            if ry1 < (y2 + 10) and ry1 > (y2 - 10) and rx1 > x1 and rx1 < x2: # bottom side of object
-                if vx == 10.0 and vy == -5.0:
-                    vy = 5.0
-                    vx = 10.0                    
-                if vy == -5.0 and vx == -10.0:
-                    vy = 5.0
-                    vx = -10.0        
+            if objTag == 0:
+                if rx1 > (x2 - 10) and rx1 < (x2 + 10) and ry1 > y1 and ry1 < y2: # right side of object
+                    if vy == 5.0 and vx == -10.0:
+                        vy = 5.0
+                        vx = 10.0                   
+                    if vy == -5.0 and vx == -10.0:
+                        vy = -5.0
+                        vx = 10.0                    
+                
+                if rx2 < (x1 + 10) and rx2 > (x1 - 10) and ry1 > y1 and ry2 < y2: # left side of object
+                    if vy == 5.0 and vx == 10.0:
+                        vy = 5.0
+                        vx = -10.0                    
+                    if vy == -5.0 and vx == -10.0:
+                        vy = -5.0
+                        vx = -10.0                    
+                
+                if ry2 > (y1 - 10) and ry2 < (y1 + 10) and rx1 > x1 and rx1 < x2: # top side of object
+                    if vy == 5.0 and vx == 10.0:
+                        vy = -5.0
+                        vx = 10.0                    
+                    if vy == 5.0 and vx == -10.0:
+                        vy = -5.0
+                        vx = -10.0
+                                        
+                if ry1 < (y2 + 10) and ry1 > (y2 - 10) and rx1 > x1 and rx1 < x2: # bottom side of object
+                    if vx == 10.0 and vy == -5.0:
+                        vy = 5.0
+                        vx = 10.0                    
+                    if vy == -5.0 and vx == -10.0:
+                        vy = 5.0
+                        vx = -10.0
+
         
         # reposition moving objects
         canvas.coords(rb1, rx1 + vx, ry1 + vy, rx2 + vx, ry2 + vy)
