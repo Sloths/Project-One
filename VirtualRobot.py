@@ -16,6 +16,9 @@ window.resizable(width=FALSE, height=FALSE)
 #countdown is set to 61 seconds
 countdown = 61
 
+#Number of games played to keep track
+intPlay = 0
+
 #loading images
 gif1 = PhotoImage(file="image1.gif")
 gif2 = PhotoImage(file="image2.gif")
@@ -29,9 +32,8 @@ def Stop():
     #stopping timer   
     global countdown
     countdown = 1
-    #Deleting robot    
-    global rb1
-    canvas.delete(rb1)
+    global btnStopPressed
+    btnStopPressed = True
     #Enables buttons so user can change map once game has stopped
     btnMap1.config(state='normal')
     btnMap2.config(state='normal')
@@ -56,20 +58,25 @@ def Start():
     # random y coordinate selected from the range
     rby = random.randrange(0,480, 1)
     global rb1
+    global intPlay
+    #Deleting robot from last game
+    if intPlay > 0:
+        canvas.delete(rb1)
+        
     # creation of the robot
     rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "blue", outline='blue')
     
     #Generate Map 1
     global ob1
-    ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red', width=3, tag="0")
+    ob1=canvas.create_rectangle(100, 100, 200, 170, fill='red', outline='red', width=3, tag="0")
     global ob2
-    ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red', width=3, tag="0")
+    ob2=canvas.create_rectangle(754, 100, 654, 170, fill='red', outline='red', width=3, tag="0")
     global ob3
-    ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red', width=3, tag="0")
+    ob3=canvas.create_rectangle(550, 280, 300, 200, fill='red', outline='red', width=3, tag="0")
     global ob4
-    ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red', width=3, tag="0")
+    ob4=canvas.create_rectangle(100, 380, 200, 310, fill='red', outline='red', width=3, tag="0")
     global ob5
-    ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red', width=3, tag="0")
+    ob5=canvas.create_rectangle(754, 380, 654, 310, fill='red', outline='red', width=3, tag="0")
 
     #Disables map buttons so user cannot change map while running
     btnMap1.config(state='disabled')
@@ -77,6 +84,9 @@ def Start():
     btnMap3.config(state='disabled')
     btnMap4.config(state='disabled')
 
+    global btnStopPressed
+    btnStopPressed = False
+    
     #Countdown function
     def counter_label(label):
       global countdown
@@ -90,18 +100,20 @@ def Start():
         global ob4
         global ob5
         global canvas
+        global btnStopPressed
         #Decrease countdown by 1
         countdown -= 1
         if countdown <= 0:
           programRunning = False
-          label.config(text=str(countdown))
           #Enables buttons so user can change map once game has stopped
           btnMap1.config(state='normal')
           btnMap2.config(state='normal')
           btnMap3.config(state='normal')
           btnMap4.config(state='normal')
-          #Message box to user
-          ctypes.windll.user32.MessageBoxA(0, "The timer has run out!", "Time up!", 0)
+          #Message box to user, only shows if timer has run out
+          if btnStopPressed == False:
+              label.config(text=str(countdown))
+              ctypes.windll.user32.MessageBoxA(0, "The timer has run out!", "Time up!", 0)
         elif countdown > 0:
           programRunning = True
           label.config(text=str(countdown))
@@ -112,36 +124,37 @@ def Start():
           # randomly select an object to turn green in the range
           green = random.randrange(1,5,1)
           if green == 1:
-            canvas.itemconfig(ob1, fill='green',outline='green',width=3, tag="1")
-            canvas.itemconfig(ob2, fill='red',outline='red',width=3, tag="0")
-            canvas.itemconfig(ob3, fill='red',outline='red',width=3, tag="0")
-            canvas.itemconfig(ob4, fill='red',outline='red',width=3, tag="0")
-            canvas.itemconfig(ob5, fill='red',outline='red',width=3, tag="0")
+            canvas.itemconfig(ob1, fill='green', outline='green', width=3, tag="1")
+            canvas.itemconfig(ob2, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob3, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob4, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob5, fill='red', outline='red', width=3, tag="0")
           elif green == 2:
-            canvas.itemconfig(ob1, fill='red',outline='red',width=3, tag="0")
-            canvas.itemconfig(ob2, fill='green',outline='green',width=3, tag="1")
-            canvas.itemconfig(ob3, fill='red',outline='red',width=3, tag="0")
-            canvas.itemconfig(ob4, fill='red',outline='red',width=3, tag="0")
-            canvas.itemconfig(ob5, fill='red',outline='red',width=3, tag ="0")
+            canvas.itemconfig(ob1, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob2, fill='green', outline='green', width=3, tag="1")
+            canvas.itemconfig(ob3, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob4, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob5, fill='red', outline='red', width=3, tag ="0")
           elif green == 3:
-            canvas.itemconfig(ob1, fill='red',outline='red',width=3, tag="0")
-            canvas.itemconfig(ob2, fill='red',outline='red',width=3, tag="0")
-            canvas.itemconfig(ob3, fill='green',outline='green',width=3, tag="1")
-            canvas.itemconfig(ob4, fill='red',outline='red',width=3, tag="0")
-            canvas.itemconfig(ob5, fill='red',outline='red',width=3, tag="0")
+            canvas.itemconfig(ob1, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob2, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob3, fill='green', outline='green', width=3, tag="1")
+            canvas.itemconfig(ob4, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob5, fill='red', outline='red', width=3, tag="0")
           elif green == 4:
-            canvas.itemconfig(ob1, fill='red',outline='red', width=3, tag="0")
-            canvas.itemconfig(ob2, fill='red',outline='red', width=3, tag="0")
-            canvas.itemconfig(ob3, fill='red',outline='red', width=3, tag="0")
-            canvas.itemconfig(ob4, fill='green',outline='green', width=3, tag="1")
-            canvas.itemconfig(ob5, fill='red',outline='red', width=3, tag="0")
+            canvas.itemconfig(ob1, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob2, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob3, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob4, fill='green', outline='green', width=3, tag="1")
+            canvas.itemconfig(ob5, fill='red', outline='red', width=3, tag="0")
           elif green == 5:
-            canvas.itemconfig(ob1, fill='red',outline='red', width=3, tag="0")
-            canvas.itemconfig(ob2, fill='red',outline='red', width=3, tag="0")
-            canvas.itemconfig(ob3, fill='red',outline='red', width=3, tag="0")
-            canvas.itemconfig(ob4, fill='red',outline='red', width=3, tag="0")
-            canvas.itemconfig(ob5, fill='green',outline='green', width=3, tag="1")
+            canvas.itemconfig(ob1, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob2, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob3, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob4, fill='red', outline='red', width=3, tag="0")
+            canvas.itemconfig(ob5, fill='green', outline='green', width=3, tag="1")
       count()
+
     counter_label(label)
    
 
@@ -212,6 +225,9 @@ def Start():
         # Sleep for 0.1 seconds, then delete the image.
         time.sleep(0.1)      
 
+        #Incrementing intPlay
+        intPlay = intPlay + 1
+        
 #Reset Function
 def Reset():
     canvas.delete("img") 
