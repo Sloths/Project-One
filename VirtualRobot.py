@@ -61,15 +61,15 @@ def Start():
     
     #Generate Map 1
     global ob1
-    ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green', width=3)
+    ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red', width=3)
     global ob2
-    ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green', width=3)
+    ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red', width=3)
     global ob3
-    ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green', width=3)
+    ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red', width=3)
     global ob4
-    ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green', width=3)
+    ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red', width=3)
     global ob5
-    ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green', width=3)
+    ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red', width=3)
 
     #Disables map buttons so user cannot change map while running
     btnMap1.config(state='disabled')
@@ -114,27 +114,33 @@ def Start():
           elif red ==2:
             ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green',outline='green',width=3)
             ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red',outline='red',width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green',outline='green',width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green',outline='green',width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green',outline='green',width=3)
-          elif red ==3:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green',outline='green',width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red',outline='red',width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red',outline='red',width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red',outline='red',width=3)
+          elif red ==2:
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red',outline='red',width=3)
             ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green',outline='green',width=3)
             ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red',outline='red',width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green',outline='green',width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green',outline='green',width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red',outline='red',width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red',outline='red',width=3)
+          elif red ==3:
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red',outline='red',width=3)
+            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red',outline='red',width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green',outline='green',width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red',outline='red',width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red',outline='red',width=3)
           elif red==4:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green',outline='green', width=3)
-            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green',outline='green', width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green',outline='green', width=3)
-            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red',outline='red', width=3)
-            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green',outline='green', width=3)
-          elif red==5:
-            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='green',outline='green', width=3)
-            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='green',outline='green', width=3)
-            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='green',outline='green', width=3)
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red',outline='red', width=3)
+            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red',outline='red', width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red',outline='red', width=3)
             ob4=canvas.create_rectangle(100, 380, 200, 310,fill='green',outline='green', width=3)
             ob5=canvas.create_rectangle(754, 380, 654, 310,fill='red',outline='red', width=3)
+          elif red==5:
+            ob1=canvas.create_rectangle(100, 100, 200, 170,fill='red',outline='red', width=3)
+            ob2=canvas.create_rectangle(754, 100, 654, 170,fill='red',outline='red', width=3)
+            ob3=canvas.create_rectangle(550, 280, 300, 200,fill='red',outline='red', width=3)
+            ob4=canvas.create_rectangle(100, 380, 200, 310,fill='red',outline='red', width=3)
+            ob5=canvas.create_rectangle(754, 380, 654, 310,fill='green',outline='green', width=3)
       count()
     counter_label(label)
    
@@ -242,7 +248,7 @@ btnStop.place(x=11, y=530)
 btnReset.place(x=712, y=530)
 
 #Creating countdown label
-label= tk.Label(font=('Helvetica', 20))
+label= tk.Label(font=('Helvetica', 20), text = "0")
 label.place(x=400, y=500)
 label.pack()
 
