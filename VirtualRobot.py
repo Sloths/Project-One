@@ -162,20 +162,16 @@ def Start():
         if rx2 >= x_max - 10:
             vx = -10.0
         if ry2 >= y_max - 10:
-            vy = -5.0        
-        
-        global red
+            vy = -5.0           
              
-        objList = [ob1, ob2, ob3, ob4, ob5]
-        greenCount = 1
-        
-        for o in objList:
+        objList = [ob1, ob2, ob3, ob4, ob5] # list containing objects as elements
+                
+        for o in objList: # object detection and response
             x1, y1, x2, y2 = canvas.coords(o)
             
             objTag = str(canvas.gettags(o))
             objTag = int(objTag[2])
-            print objTag
-            
+                        
             if objTag == 0:
                 if rx1 > (x2 - 10) and rx1 < (x2 + 10) and ry1 > y1 and ry1 < y2: # right side of object
                     if vy == 5.0 and vx == -10.0:
@@ -189,7 +185,7 @@ def Start():
                     if vy == 5.0 and vx == 10.0:
                         vy = 5.0
                         vx = -10.0                    
-                    if vy == -5.0 and vx == -10.0:
+                    if vy == -5.0 and vx == 10.0:
                         vy = -5.0
                         vx = -10.0                    
                 
@@ -208,7 +204,6 @@ def Start():
                     if vy == -5.0 and vx == -10.0:
                         vy = 5.0
                         vx = -10.0
-
         
         # reposition moving objects
         canvas.coords(rb1, rx1 + vx, ry1 + vy, rx2 + vx, ry2 + vy)
