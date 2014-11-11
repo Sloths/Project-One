@@ -19,9 +19,6 @@ countdown = 61
 #Number of games played to keep track
 intPlay = 0
 
-#Map button pressed intilised
-ButtonPressed = 1
-
 #loading images
 gif1 = PhotoImage(file="image1.gif")
 gif2 = PhotoImage(file="image2.gif")
@@ -52,18 +49,10 @@ def Start():
     y_max = 480.0
 
     # set movement velocity
-    vx = 10.0 # x velocity
-    vy = 5.0 # y velocity
-
-    global ButtonPressed
-    if ButtonPressed == 1:
-        MapLoad1()
-    elif ButtonPressed == 2:
-        MapLoad2()
-    elif ButtonPressed == 3:
-        MapLoad3()
-    elif ButtonPressed == 4:
-        MapLoad4()
+    r1vx = 10.0 # x velocity for robot 1
+    r1vy = 5.0 # y velocity for robot 1
+    r2vx = -10.0 # x velocity for robot 2
+    r2vy = -5.0 # velocity for robot 2
 
     # Random Respawn of Robot
     # random x coordinate selected from the range
@@ -71,14 +60,29 @@ def Start():
     # random y coordinate selected from the range
     rby = random.randrange(0,480, 1)
     global rb1
+    global rb2
     global intPlay
     #Deleting robot from last game
     if intPlay > 0:
         canvas.delete(rb1)
+        canvas.delete(rb2)
         
     # creation of the robot
-    rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "light blue", outline='blue')
+    rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "blue", outline='blue')
+    rb2 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "red", outline='red')
     
+    #Generate Map 1
+    global ob1
+    ob1=canvas.create_rectangle(100, 100, 200, 170, fill='red', outline='red', width=3, tag="0")
+    global ob2
+    ob2=canvas.create_rectangle(754, 100, 654, 170, fill='red', outline='red', width=3, tag="0")
+    global ob3
+    ob3=canvas.create_rectangle(550, 280, 300, 200, fill='red', outline='red', width=3, tag="0")
+    global ob4
+    ob4=canvas.create_rectangle(100, 380, 200, 310, fill='red', outline='red', width=3, tag="0")
+    global ob5
+    ob5=canvas.create_rectangle(754, 380, 654, 310, fill='red', outline='red', width=3, tag="0")
+
     #Disables map buttons so user cannot change map while running
     btnMap1.config(state='disabled')
     btnMap2.config(state='disabled')
@@ -166,17 +170,28 @@ def Start():
     while programRunning == True:  
 
         # create shape coordinates        
-        rx1, ry1, rx2, ry2 = canvas.coords(rb1)
+        r1x1, r1y1, r1x2, r1y2 = canvas.coords(rb1)
+        r2x1, r2y1, r2x2, r2y2 = canvas.coords(rb2) 
 
-        # robot boundary detection and response
-        if rx1 <= x_min + 10:
-            vx = 10.0
-        if ry1 <= y_min + 10:
-            vy = 5.0
-        if rx2 >= x_max - 10:
-            vx = -10.0
-        if ry2 >= y_max - 10:
-            vy = -5.0           
+        # robot 1 boundary detection and response
+        if r1x1 <= x_min + 10:
+            r1vx = 10.0            
+        if r1y1 <= y_min + 10:
+            r1vy = 5.0
+        if r1x2 >= x_max - 10:
+            r1vx = -10.0
+        if r1y2 >= y_max - 10:
+            r1vy = -5.0
+
+        # robot 2 boundary detection and response
+        if r2x1 <= x_min + 10:
+            r2vx = 10.0            
+        if r2y1 <= y_min + 10:
+            r2vy = 5.0
+        if r2x2 >= x_max - 10:
+            r2vx = -10.0
+        if r2y2 >= y_max - 10:
+            r2vy = -5.0
              
         objList = [ob1, ob2, ob3, ob4, ob5] # list containing objects as elements
                 
@@ -187,40 +202,75 @@ def Start():
             objTag = int(objTag[2])
                         
             if objTag == 0:
-                if rx1 > (x2 - 10) and rx1 < (x2 + 10) and ry1 > y1 and ry1 < y2: # right side of object
-                    if vy == 5.0 and vx == -10.0:
-                        vy = 5.0
-                        vx = 10.0                   
-                    if vy == -5.0 and vx == -10.0:
-                        vy = -5.0
-                        vx = 10.0                    
+                # robot 1
+                if r1x1 > (x2 - 10) and r1x1 < (x2 + 10) and r1y1 > y1 and r1y1 < y2: # right side of object
+                    if r1vy == 5.0 and r1vx == -10.0:
+                        r1vy = 5.0
+                        r1vx = 10.0                   
+                    if r1vy == -5.0 and r1vx == -10.0:
+                        r1vy = -5.0
+                        r1vx = 10.0                    
                 
-                if rx2 < (x1 + 10) and rx2 > (x1 - 10) and ry1 > y1 and ry2 < y2: # left side of object
-                    if vy == 5.0 and vx == 10.0:
-                        vy = 5.0
-                        vx = -10.0                    
-                    if vy == -5.0 and vx == 10.0:
-                        vy = -5.0
-                        vx = -10.0                    
+                if r1x2 < (x1 + 10) and r1x2 > (x1 - 10) and r1y1 > y1 and r1y2 < y2: # left side of object
+                    if r1vy == 5.0 and r1vx == 10.0:
+                        r1vy = 5.0
+                        r1vx = -10.0                    
+                    if r1vy == -5.0 and r1vx == 10.0:
+                        r1vy = -5.0
+                        r1vx = -10.0                    
                 
-                if ry2 > (y1 - 10) and ry2 < (y1 + 10) and rx1 > x1 and rx1 < x2: # top side of object
-                    if vy == 5.0 and vx == 10.0:
-                        vy = -5.0
-                        vx = 10.0                    
-                    if vy == 5.0 and vx == -10.0:
-                        vy = -5.0
-                        vx = -10.0
+                if r1y2 > (y1 - 10) and r1y2 < (y1 + 10) and r1x1 > x1 and r1x1 < x2: # top side of object
+                    if r1vy == 5.0 and r1vx == 10.0:
+                        r1vy = -5.0
+                        r1vx = 10.0                    
+                    if r1vy == 5.0 and r1vx == -10.0:
+                        r1vy = -5.0
+                        r1vx = -10.0
                                         
-                if ry1 < (y2 + 10) and ry1 > (y2 - 10) and rx1 > x1 and rx1 < x2: # bottom side of object
-                    if vx == 10.0 and vy == -5.0:
-                        vy = 5.0
-                        vx = 10.0                    
-                    if vy == -5.0 and vx == -10.0:
-                        vy = 5.0
-                        vx = -10.0
+                if r1y1 < (y2 + 10) and r1y1 > (y2 - 10) and r1x1 > x1 and r1x1 < x2: # bottom side of object
+                    if r1vx == 10.0 and r1vy == -5.0:
+                        r1vy = 5.0
+                        r1vx = 10.0                    
+                    if r1vy == -5.0 and r1vx == -10.0:
+                        r1vy = 5.0
+                        r1vx = -10.0
+
+                # robot 2
+                if r2x1 > (x2 - 10) and r2x1 < (x2 + 10) and r2y1 > y1 and r2y1 < y2: # right side of object
+                    if r2vy == 5.0 and r2vx == -10.0:
+                        r2vy = 5.0
+                        r2vx = 10.0                   
+                    if r2vy == -5.0 and r2vx == -10.0:
+                        r2vy = -5.0
+                        r2vx = 10.0                    
+                
+                if r2x2 < (x1 + 10) and r2x2 > (x1 - 10) and r2y1 > y1 and r2y2 < y2: # left side of object
+                    if r2vy == 5.0 and r2vx == 10.0:
+                        r2vy = 5.0
+                        r2vx = -10.0                    
+                    if r2vy == -5.0 and r2vx == 10.0:
+                        r2vy = -5.0
+                        r2vx = -10.0                    
+                
+                if r2y2 > (y1 - 10) and r2y2 < (y1 + 10) and r2x1 > x1 and r2x1 < x2: # top side of object
+                    if r2vy == 5.0 and r2vx == 10.0:
+                        r2vy = -5.0
+                        r2vx = 10.0                    
+                    if r2vy == 5.0 and r2vx == -10.0:
+                        r2vy = -5.0
+                        r2vx = -10.0
+                                        
+                if r1y1 < (y2 + 10) and r1y1 > (y2 - 10) and r1x1 > x1 and r1x1 < x2: # bottom side of object
+                    if r2vx == 10.0 and r1vy == -5.0:
+                        r2vy = 5.0
+                        r2vx = 10.0                    
+                    if r1vy == -5.0 and r1vx == -10.0:
+                        r2vy = 5.0
+                        r2vx = -10.0
         
         # reposition moving objects
-        canvas.coords(rb1, rx1 + vx, ry1 + vy, rx2 + vx, ry2 + vy)
+        canvas.coords(rb1, r1x1 + r1vx, r1y1 + r1vy, r1x2 + r1vx, r1y2 + r1vy)
+        canvas.coords(rb2, r2x1 + r2vx, r2y1 + r2vy, r2x2 + r2vx, r2y2 + r2vy)
         canvas.update()
 
         # Sleep for 0.1 seconds, then delete the image.
@@ -231,93 +281,30 @@ def Start():
         
 #Reset Function
 def Reset():
-    Stop()
-    canvas.delete("all")
-    global ButtonPressed
-    ButtonPressed = 1
+    canvas.delete("img") 
 
-#Map Functions
+#Map 1 Function
 def Map1():
-    global ob1
-    global ob2
-    global ob3
-    global ob4
-    global ob5
-    ob1=canvas.create_rectangle(100, 100, 200, 170, fill='red', outline='red', width=3, tag="0")
-    ob2=canvas.create_rectangle(754, 100, 654, 170, fill='red', outline='red', width=3, tag="0")
-    ob3=canvas.create_rectangle(550, 280, 300, 200, fill='red', outline='red', width=3, tag="0")
-    ob4=canvas.create_rectangle(100, 380, 200, 310, fill='red', outline='red', width=3, tag="0")
-    ob5=canvas.create_rectangle(754, 380, 654, 310, fill='red', outline='red', width=3, tag="0")
-
-def Map2():
-    global ob1
-    global ob2
-    global ob3
-    global ob4
-    global ob5
-    ob1=canvas.create_rectangle(180, 140, 310, 85, fill='red', outline='red', width=3, tag="0")
-    ob2=canvas.create_rectangle(550, 110, 800, 60, fill='red', outline='red', width=3, tag="0")
-    ob3=canvas.create_rectangle(390, 190, 470, 400, fill='red', outline='red', width=3, tag="0")
-    ob4=canvas.create_rectangle(50, 330, 330, 400, fill='red', outline='red', width=3, tag="0")
-    ob5=canvas.create_rectangle(550, 330, 800, 400, fill='red', outline='red', width=3, tag="0")
-
-def Map3():
-    global ob1
-    global ob2
-    global ob3
-    global ob4
-    global ob5
-    ob1=canvas.create_rectangle(60, 60, 130, 130, fill='red', outline='red', width=3, tag="0")
-    ob2=canvas.create_rectangle(350, 100, 420, 350, fill='red', outline='red', width=3, tag="0")
-    ob3=canvas.create_rectangle(500, 130, 790, 70, fill='red', outline='red', width=3, tag="0")
-    ob4=canvas.create_rectangle(250, 440, 310, 390, fill='red', outline='red', width=3, tag="0")
-    ob5=canvas.create_rectangle(490, 360, 790, 420, fill='red', outline='red', width=3, tag="0")
-
-def Map4():
-    global ob1
-    global ob2
-    global ob3
-    global ob4
-    global ob5
-    ob1=canvas.create_rectangle(390, 60, 470, 120, fill='red', outline='red', width=3, tag="0")
-    ob2=canvas.create_rectangle(190, 210, 270, 270, fill='red', outline='red', width=3, tag="0")
-    ob3=canvas.create_rectangle(590, 210, 670, 270, fill='red', outline='red', width=3, tag="0")
-    ob4=canvas.create_rectangle(390, 370, 470, 430, fill='red', outline='red', width=3, tag="0")
-    ob5=canvas.create_rectangle(640, 370, 800, 430, fill='red', outline='red', width=3, tag="0")
-    
-
-#Loading map functions
-def MapLoad1():
     canvas.delete("all")
+    ob1=canvas.create_rectangle(100, 100, 200, 170,fill='white', width=3)
+    ob2=canvas.create_rectangle(754, 100, 654, 170,fill='white', width=3)
+    ob3=canvas.create_rectangle(550, 280, 300, 200,fill='white', width=3)
+    ob4=canvas.create_rectangle(100, 380, 200, 310,fill='white', width=3)
+    ob5=canvas.create_rectangle(754, 380, 654, 310,fill='white', width=3)
+
+#Loading image functions
+def Image1():
     global gif1
     image1=canvas.create_image(0,0,image=gif1,anchor="nw",tag="img")
-    Map1()
-    global ButtonPressed
-    ButtonPressed = 1
-    
-def MapLoad2():
-    canvas.delete("all")
+def Image2():
     global gif2
     image2=canvas.create_image(0,0,image=gif2,anchor="nw",tag="img")
-    Map2()
-    global ButtonPressed
-    ButtonPressed = 2
-    
-def MapLoad3():
-    canvas.delete("all")
+def Image3():
     global gif3
     image3=canvas.create_image(0,0,image=gif3,anchor="nw",tag="img")
-    Map3()
-    global ButtonPressed
-    ButtonPressed = 3
-    
-def MapLoad4():
-    canvas.delete("all")
+def Image4():
     global gif4
     image4=canvas.create_image(0,0,image=gif4,anchor="nw",tag="img")
-    Map4()
-    global ButtonPressed
-    ButtonPressed = 4
                                
 #Creating buttons
 btnStart=Button(window, text='Start', height=1, width=20, command=Start)
@@ -335,10 +322,10 @@ label.place(x=400, y=500)
 label.pack()
 
 #Creating image buttons
-btnMap1=Button(window, text="1", height=1, width=2, command=MapLoad1)
-btnMap2=Button(window, text="2", height=1, width=2, command=MapLoad2)
-btnMap3=Button(window, text="3", height=1, width=2, command=MapLoad3)
-btnMap4=Button(window, text="4", height=1, width=2, command=MapLoad4)
+btnMap1=Button(window, text="1", height=1, width=2, command=Image1)
+btnMap2=Button(window, text="2", height=1, width=2, command=Image2)
+btnMap3=Button(window, text="3", height=1, width=2, command=Image3)
+btnMap4=Button(window, text="4", height=1, width=2, command=Image4)
 
 #Placement of image buttons
 btnMap1.place(x=712, y=500)
