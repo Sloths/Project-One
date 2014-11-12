@@ -69,9 +69,9 @@ def Start():
 
     # Random Respawn of Robot
     # random x coordinate selected from the range
-    rbx = random.randrange(0, 854, 1)
+    rbx = random.randint(0, 844)
     # random y coordinate selected from the range
-    rby = random.randrange(0,480, 1)
+    rby = random.randint(0, 470)
     global rb1
     global rb2
     global intPlay
@@ -81,8 +81,8 @@ def Start():
         canvas.delete(rb2)
         
     # creation of the robot
-    rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "blue", outline='blue')
-    rb2 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "red", outline='red')
+    rb1 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "cyan", outline = "blue")
+    rb2 = canvas.create_rectangle(rbx, rby, rbx + 10, rby + 10, fill = "pink", outline = "deep pink")
 
 
     #Disables map buttons so user cannot change map while running
@@ -172,103 +172,87 @@ def Start():
     while programRunning == True:  
 
         # create shape coordinates        
-        r1x1, r1y1, r1x2, r1y2 = canvas.coords(rb1)
-        r2x1, r2y1, r2x2, r2y2 = canvas.coords(rb2) 
+        r1x1, r1y1, r1x2, r1y2 = canvas.coords(rb1) # sides of rb1 object
+        r2x1, r2y1, r2x2, r2y2 = canvas.coords(rb2) # side of rb1 object
 
         # robot 1 boundary detection and response
-        if r1x1 <= x_min + 10:
+        if r1x1 <= x_min + 10: # robot has reached left side of screen
             r1vx = 10.0            
-        if r1y1 <= y_min + 10:
+        if r1y1 <= y_min + 10: # robot has reached top side of screen
             r1vy = 5.0
-        if r1x2 >= x_max - 10:
+        if r1x2 >= x_max - 10: # robot has reached right side of screen
             r1vx = -10.0
-        if r1y2 >= y_max - 10:
+        if r1y2 >= y_max - 10: # robot has reached bottom side of screen
             r1vy = -5.0
 
         # robot 2 boundary detection and response
-        if r2x1 <= x_min + 10:
+        if r2x1 <= x_min + 10: # robot has reached left side of screen
             r2vx = 10.0            
-        if r2y1 <= y_min + 10:
+        if r2y1 <= y_min + 10: # robot has reached top side of screen
             r2vy = 5.0
-        if r2x2 >= x_max - 10:
+        if r2x2 >= x_max - 10: # robot has reached right side of screen
             r2vx = -10.0
-        if r2y2 >= y_max - 10:
+        if r2y2 >= y_max - 10: # robot has reached bottom side of screen
             r2vy = -5.0
              
         objList = [ob1, ob2, ob3, ob4, ob5] # list containing objects as elements
                 
         for o in objList: # object detection and response
-            x1, y1, x2, y2 = canvas.coords(o)
-            
+
+            x1, y1, x2, y2 = canvas.coords(o) # declare sides of objList element            
             objTag = str(canvas.gettags(o))
             objTag = int(objTag[2])
                         
             if objTag == 0:
                 # robot 1
                 if r1x1 > (x2 - 10) and r1x1 < (x2 + 10) and r1y1 > y1 and r1y1 < y2: # right side of object
-                    if r1vy == 5.0 and r1vx == -10.0:
-                        r1vy = 5.0
-                        r1vx = 10.0                   
-                    if r1vy == -5.0 and r1vx == -10.0:
-                        r1vy = -5.0
-                        r1vx = 10.0                    
-                
+                    if r1vy == 5.0 and r1vx == -10.0: # if approach from top right
+                        r1vx = 10.0    
+                    if r1vy == -5.0 and r1vx == -10.0: # if approach from bottom right
+                        r1vx = 10.0                             
+                                    
                 if r1x2 < (x1 + 10) and r1x2 > (x1 - 10) and r1y1 > y1 and r1y2 < y2: # left side of object
-                    if r1vy == 5.0 and r1vx == 10.0:
-                        r1vy = 5.0
+                    if r1vy == 5.0 and r1vx == 10.0: # if approach from top right
                         r1vx = -10.0                    
-                    if r1vy == -5.0 and r1vx == 10.0:
-                        r1vy = -5.0
+                    if r1vy == -5.0 and r1vx == 10.0: # if approach from bottom right
                         r1vx = -10.0                    
                 
                 if r1y2 > (y1 - 10) and r1y2 < (y1 + 10) and r1x1 > x1 and r1x1 < x2: # top side of object
-                    if r1vy == 5.0 and r1vx == 10.0:
+                    if r1vy == 5.0 and r1vx == 10.0: # if approach from top left
+                        r1vy = -5.0                                           
+                    if r1vy == 5.0 and r1vx == -10.0: # if approach from top right
                         r1vy = -5.0
-                        r1vx = 10.0                    
-                    if r1vy == 5.0 and r1vx == -10.0:
-                        r1vy = -5.0
-                        r1vx = -10.0
-                                        
+                                                                
                 if r1y1 < (y2 + 10) and r1y1 > (y2 - 10) and r1x1 > x1 and r1x1 < x2: # bottom side of object
-                    if r1vx == 10.0 and r1vy == -5.0:
+                    if r1vy == -5.0 and r1vx == 10.0: # if approach from bottom left
+                        r1vy = 5.0                                           
+                    if r1vy == -5.0 and r1vx == -10.0: # if approach from bottom right
                         r1vy = 5.0
-                        r1vx = 10.0                    
-                    if r1vy == -5.0 and r1vx == -10.0:
-                        r1vy = 5.0
-                        r1vx = -10.0
-
+                        
                 # robot 2
                 if r2x1 > (x2 - 10) and r2x1 < (x2 + 10) and r2y1 > y1 and r2y1 < y2: # right side of object
-                    if r2vy == 5.0 and r2vx == -10.0:
-                        r2vy = 5.0
-                        r2vx = 10.0                   
-                    if r2vy == -5.0 and r2vx == -10.0:
-                        r2vy = -5.0
-                        r2vx = 10.0                    
-                
+                    if r2vy == 5.0 and r2vx == -10.0: # if approach from top right
+                        r2vx = 10.0    
+                    if r2vy == -5.0 and r2vx == -10.0: # if approach from bottom right
+                        r2vx = 10.0                             
+                                    
                 if r2x2 < (x1 + 10) and r2x2 > (x1 - 10) and r2y1 > y1 and r2y2 < y2: # left side of object
-                    if r2vy == 5.0 and r2vx == 10.0:
-                        r2vy = 5.0
+                    if r2vy == 5.0 and r2vx == 10.0: # if approach from top right
                         r2vx = -10.0                    
-                    if r2vy == -5.0 and r2vx == 10.0:
-                        r2vy = -5.0
+                    if r2vy == -5.0 and r2vx == 10.0: # if approach from bottom right
                         r2vx = -10.0                    
                 
                 if r2y2 > (y1 - 10) and r2y2 < (y1 + 10) and r2x1 > x1 and r2x1 < x2: # top side of object
-                    if r2vy == 5.0 and r2vx == 10.0:
+                    if r2vy == 5.0 and r2vx == 10.0: # if approach from top left
+                        r2vy = -5.0                                           
+                    if r2vy == 5.0 and r2vx == -10.0: # if approach from top right
                         r2vy = -5.0
-                        r2vx = 10.0                    
-                    if r2vy == 5.0 and r2vx == -10.0:
-                        r2vy = -5.0
-                        r2vx = -10.0
-                                        
-                if r1y1 < (y2 + 10) and r1y1 > (y2 - 10) and r1x1 > x1 and r1x1 < x2: # bottom side of object
-                    if r2vx == 10.0 and r1vy == -5.0:
+                                                                
+                if r2y1 < (y2 + 10) and r2y1 > (y2 - 10) and r2x1 > x1 and r2x1 < x2: # bottom side of object
+                    if r2vy == -5.0 and r2vx == 10.0: # if approach from bottom left
+                        r2vy = 5.0                                           
+                    if r2vy == -5.0 and r2vx == -10.0: # if approach from bottom right
                         r2vy = 5.0
-                        r2vx = 10.0                    
-                    if r1vy == -5.0 and r1vx == -10.0:
-                        r2vy = 5.0
-                        r2vx = -10.0
         
         # reposition moving objects
         canvas.coords(rb1, r1x1 + r1vx, r1y1 + r1vy, r1x2 + r1vx, r1y2 + r1vy)
