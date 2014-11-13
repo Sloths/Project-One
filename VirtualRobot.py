@@ -35,6 +35,7 @@ def Stop():
     #stopping timer   
     global countdown
     countdown = 1
+    #Variable to say if stop button has been pressed
     global btnStopPressed
     btnStopPressed = True
     #Enables buttons so user can change map once game has stopped
@@ -57,7 +58,9 @@ def Start():
     r2vx = -10.0 # x velocity for robot 2
     r2vy = -5.0 # velocity for robot 2
 
+    #Variable to show which map button has been pressed
     global ButtonPressed
+    #Slection of map to load
     if ButtonPressed == 1:
         MapLoad1()
     elif ButtonPressed == 2:
@@ -91,6 +94,7 @@ def Start():
     btnMap3.config(state='disabled')
     btnMap4.config(state='disabled')
 
+    #Setting btnStopPressed to false as the start button has been pressed
     global btnStopPressed
     btnStopPressed = False
     
@@ -131,6 +135,7 @@ def Start():
           # randomly select an object to turn green in the range
           green = random.randrange(1,5,1)
           if green == 1:
+            #Giving each object the tag 0 if red and 1 if green for use in collision detection
             canvas.itemconfig(ob1, fill='green', outline='green', width=3, tag="1")
             canvas.itemconfig(ob2, fill='red', outline='red', width=3, tag="0")
             canvas.itemconfig(ob3, fill='red', outline='red', width=3, tag="0")
@@ -267,18 +272,23 @@ def Start():
         
 #Reset Function
 def Reset():
+    #Calls stop function
     Stop()
+    #Deletes everything on canvas
     canvas.delete("all")
+    #Sets button pressed to 1 (default value)
     global ButtonPressed
     ButtonPressed = 1
 
 #Map Functions
 def Map1():
+    #Defining objects as globals
     global ob1
     global ob2
     global ob3
     global ob4
     global ob5
+    #Creating objects as rectangles using coordinates, giving tag of 0
     ob1=canvas.create_rectangle(100, 100, 200, 170, fill='red', outline='red', width=3, tag="0")
     ob2=canvas.create_rectangle(754, 100, 654, 170, fill='red', outline='red', width=3, tag="0")
     ob3=canvas.create_rectangle(550, 280, 300, 200, fill='red', outline='red', width=3, tag="0")
@@ -286,11 +296,13 @@ def Map1():
     ob5=canvas.create_rectangle(754, 380, 654, 310, fill='red', outline='red', width=3, tag="0")
 
 def Map2():
+    #Defining objects as globals
     global ob1
     global ob2
     global ob3
     global ob4
     global ob5
+    #Creating objects as rectangles using coordinates, giving tag of 0
     ob1=canvas.create_rectangle(180, 140, 310, 85, fill='red', outline='red', width=3, tag="0")
     ob2=canvas.create_rectangle(550, 110, 800, 60, fill='red', outline='red', width=3, tag="0")
     ob3=canvas.create_rectangle(390, 190, 470, 400, fill='red', outline='red', width=3, tag="0")
@@ -298,11 +310,13 @@ def Map2():
     ob5=canvas.create_rectangle(550, 330, 800, 400, fill='red', outline='red', width=3, tag="0")
 
 def Map3():
+    #Defining objects as globals
     global ob1
     global ob2
     global ob3
     global ob4
     global ob5
+    #Creating objects as rectangles using coordinates, giving tag of 0
     ob1=canvas.create_rectangle(60, 60, 130, 130, fill='red', outline='red', width=3, tag="0")
     ob2=canvas.create_rectangle(350, 100, 420, 350, fill='red', outline='red', width=3, tag="0")
     ob3=canvas.create_rectangle(500, 130, 790, 70, fill='red', outline='red', width=3, tag="0")
@@ -310,11 +324,13 @@ def Map3():
     ob5=canvas.create_rectangle(490, 360, 790, 420, fill='red', outline='red', width=3, tag="0")
 
 def Map4():
+    #Defining objects as globals
     global ob1
     global ob2
     global ob3
     global ob4
     global ob5
+    #Creating objects as rectangles using coordinates, giving tag of 0
     ob1=canvas.create_rectangle(390, 60, 470, 120, fill='red', outline='red', width=3, tag="0")
     ob2=canvas.create_rectangle(190, 210, 270, 270, fill='red', outline='red', width=3, tag="0")
     ob3=canvas.create_rectangle(590, 210, 670, 270, fill='red', outline='red', width=3, tag="0")
@@ -324,34 +340,50 @@ def Map4():
 
 #Loading map functions
 def MapLoad1():
+    #Deletes any previous map/object on canvas
     canvas.delete("all")
+    #Loads background image
     global gif1
     image1=canvas.create_image(0,0,image=gif1,anchor="nw",tag="img")
+    #Creates map 1 by calling function
     Map1()
+    #Sets ButtonPressed to equal 1
     global ButtonPressed
     ButtonPressed = 1
     
 def MapLoad2():
+    #Deletes any previous map/object on canvas
     canvas.delete("all")
+    #Loads background image
     global gif2
     image2=canvas.create_image(0,0,image=gif2,anchor="nw",tag="img")
+    #Creates map 2 by called function
     Map2()
+    #Sets ButtonPressed to equal 2
     global ButtonPressed
     ButtonPressed = 2
     
 def MapLoad3():
+    #Deletes any previous map/object on canvas
     canvas.delete("all")
+    #Loads background image
     global gif3
     image3=canvas.create_image(0,0,image=gif3,anchor="nw",tag="img")
+    #Creates map 3 by called function
     Map3()
+    #Sets ButtonPressed to equal 3
     global ButtonPressed
     ButtonPressed = 3
     
 def MapLoad4():
+    #Deletes any previous map/object on canvas
     canvas.delete("all")
+    #Loads background image
     global gif4
     image4=canvas.create_image(0,0,image=gif4,anchor="nw",tag="img")
+    #Creates map 3 by called function
     Map4()
+    #Sets ButtonPressed to equal 4
     global ButtonPressed
     ButtonPressed = 4
                                
