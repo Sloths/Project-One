@@ -274,6 +274,7 @@ def Start():
 def Reset():
     #Calls stop function
     Stop()
+    label.config(text="0")
     #Deletes everything on canvas
     canvas.delete("all")
     #Sets button pressed to 1 (default value)
